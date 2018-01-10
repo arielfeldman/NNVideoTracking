@@ -3,7 +3,7 @@ Creating a GUI that can be launched from terminal and from which a user may sele
 """
 
 import sys
-import RNELBanner_rc
+#import RNELBanner_rc
 from PyQt4 import QtCore, QtGui
 from PyQt4.QtGui import QPalette
 import math
@@ -26,7 +26,7 @@ class Ui_Form(QtGui.QWidget):
         # Create UI elements
         label_banner = QtGui.QLabel()
         label_banner.setText("")
-        label_banner.setPixmap(QtGui.QPixmap(":/RNELicon/RNELBanner.png"))
+        #label_banner.setPixmap(QtGui.QPixmap(":/RNELicon/RNELBanner.png"))
 
         font = QtGui.QFont("Helvetica", 12, 75)
         font.setBold(True)
@@ -104,7 +104,7 @@ class Ui_Form(QtGui.QWidget):
 
         label_website = QtGui.QLabel()
         label_website.setFont(font)
-        label_website.setText("<a href=\"https://github.com/kemerelab/Elevator/\">Elevator Maze</a>")
+        #label_website.setText("<a href=\"https://github.com/kemerelab/Elevator/\">Elevator Maze</a>")
         label_website.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
         label_website.setOpenExternalLinks(True)
 
@@ -194,8 +194,8 @@ class Ui_Form(QtGui.QWidget):
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-        ex = Ui_Form()
-        ex.show()
+    ex = Ui_Form()
+    ex.show()
         
     ex.raise_()
     
