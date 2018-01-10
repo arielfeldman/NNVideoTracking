@@ -12,8 +12,8 @@ import os
 class Ui_Form(QtGui.QWidget):
     def __init__(self):
         super(Ui_Form, self).__init__()
-
-self.setupUi()
+        self.setupUi()
+    
     def setupUi(self):
 
         self.setWindowTitle("RNEL Rodent Headtracking")
