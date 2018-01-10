@@ -4,3 +4,4 @@ Creating a GUI that can be launched from terminal and from which a user may sele
 
 from PyQt4 import QtGui
 
+testing
