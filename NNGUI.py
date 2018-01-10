@@ -119,7 +119,6 @@ self.setupUi()
         #formLayout.addRow(label_torque, self.comboBox_torque)
         formLayout.addRow(label_wheeldiameter, self.lineEdit_wheeldiameter)
        
-
         formLayout2 = QtGui.QFormLayout()
         formLayout2.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         formLayout2.setLabelAlignment(QtCore.Qt.AlignLeft)
@@ -153,7 +152,6 @@ self.setupUi()
         formLayout3 = QtGui.QFormLayout()
         verticalLayout2.addLayout(formLayout3)
 
-
         formLayout3.addRow(label_position, self.position) #LOOK HERE
      
         verticalLayout2.addWidget(label_history)
@@ -162,11 +160,43 @@ self.setupUi()
         verticalLayout2.addWidget(label_instructions)
         verticalLayout2.addWidget(label_website)
 
-
-
-        self.btn_run.clicked.connect(self.collectMotorData)
-        self.btn_doorstat.clicked.connect(self.sendServoData)
+        # self.btn_run.clicked.connect(self.collectMotorData)
+        # self.btn_doorstat.clicked.connect(self.sendServoData)
         self.preset_checkbox.stateChanged.connect(self.updateUI)
         self.comboBox_level.currentIndexChanged.connect(self.updateUI)
         self.btn_assign.clicked.connect(self.assignPosition)
         self.btn_assign.clicked.connect(self.updateUI)
+    
+    def updateUI(self):
+        if self.preset_checkbox.checkState() == 0:
+            self.lineEdit_distance.setEnabled(True)
+            self.lineEdit_distance.setText("0")
+            self.comboBox_direction.setEnabled(True)
+            self.comboBox_level.setEnabled(False)
+            self.btn_assign.setEnabled(False)
+        
+        if self.preset_checkbox.checkState() == 2:
+            self.lineEdit_distance.setEnabled(False)
+            self.lineEdit_distance.setText(str(steps))
+            self.comboBox_direction.setEnabled(False)
+        
+            if direction == "Up":
+                self.comboBox_direction.setCurrentIndex(0)
+        
+            else:
+                self.comboBox_direction.setCurrentIndex(1)
+        
+            self.comboBox_level.setEnabled(True)
+            self.btn_assign.setEnabled(True)
+
+    def updatePosition(self, val):
+        self.position.display(val)
+
+if __name__ == '__main__':
+    app = QtGui.QApplication(sys.argv)
+        ex = Ui_Form()
+        ex.show()
+        
+    ex.raise_()
+    
+    sys.exit(app.exec_())
