@@ -12,13 +12,11 @@ import os
 class Ui_Form(QtGui.QWidget):
     def __init__(self):
         super(Ui_Form, self).__init__()
-        self.currentPosition = 0
-        self.level_position = {1:0, 2:1000, 3:2000}
 
 self.setupUi()
     def setupUi(self):
 
-        self.setWindowTitle("RNEL Elevator Controller")
+        self.setWindowTitle("RNEL Rodent Headtracking")
         rowSpacer = QtGui.QSpacerItem(1, 20)
         columnSpacer = QtGui.QSpacerItem(50, 1)
 
@@ -32,35 +30,33 @@ self.setupUi()
 
         font = QtGui.QFont("Helvetica", 12, 75)
         font.setBold(True)
+        
         label_motorState = QtGui.QLabel("Stepper Motor Parameters")
         label_motorState.setFont(font)
-
         label_time = QtGui.QLabel("Time Between Levels (seconds):")
         label_steps = QtGui.QLabel("Distance (in):")
         label_wheeldiameter = QtGui.QLabel("Wheel Diameter (in)")
         label_direction = QtGui.QLabel("Direction:")
-        label_mode = QtGui.QLabel("Mode:")
-        #label_torque = QtGui.QLabel("Torque:")
-		
-        label_capacitance = QtGui.QLabel("Capacitance: ") #LOOK HERE	
-        label_capacitance.setFont(font)
+        label_mode = QtGui.QLabel("Mode:")		
+        label_position = QtGui.QLabel("Head Position: ") #LOOK HERE	
+        label_position.setFont(font)
 
-        self.capacitance = QtGui.QLCDNumber(self) #LOOK HERE 
-        self.capacitance.setFont(font)
+        self.position = QtGui.QLCDNumber(self) #LOOK HERE 
+        self.position.setFont(font)
         palette = QPalette()
        # palette.setBrush(QtGui.QPalette.Light, QtCore.Qt.black)
         brush = QtGui.QBrush(QtGui.QColor(0,0,0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Dark, brush)
-        self.capacitance.setPalette(palette)
+        self.position.setPalette(palette)
 
-        self.capacitance.setDigitCount(8)
-        self.threadclass = Capacitance()
+        self.position.setDigitCount(8)
+        self.threadclass = Position()
         self.threadclass.start()
 		
-        self.connect(self.threadclass, QtCore.SIGNAL('CAP'), self.updateCapacitance)        
+        self.connect(self.threadclass, QtCore.SIGNAL('POS'), self.updatePosition)        
         
-        self.capacitance.display(0) # just so something is there
+        self.position.display(0,0) # just so something is there
                 
         self.lineEdit_time = QtGui.QLineEdit()
         self.lineEdit_time.setMaximumSize(QtCore.QSize(100, 30))
@@ -84,23 +80,23 @@ self.setupUi()
         self.comboBox_level.addItems(["1", "2", "3"])
         self.comboBox_level.setEnabled(False)
 
-        label_assign = QtGui.QLabel("Assign position to level?")
-        self.btn_assign = QtGui.QPushButton("Assign")
-        self.btn_assign.setEnabled(False)
+        # label_assign = QtGui.QLabel("Assign position to level?")
+        # self.btn_assign = QtGui.QPushButton("Assign")
+        # self.btn_assign.setEnabled(False)
 
-        self.btn_run = QtGui.QPushButton("Run")
-        self.btn_doorstat = QtGui.QPushButton("Open/Close")
-        self.progress_bar = QtGui.QProgressBar()
-        self.btn_doorstat = QtGui.QPushButton("Open/Close")
+        # self.btn_run = QtGui.QPushButton("Run")
+        # self.btn_doorstat = QtGui.QPushButton("Open/Close")
+        # self.progress_bar = QtGui.QProgressBar()
+        # self.btn_doorstat = QtGui.QPushButton("Open/Close")
 
-        label_history = QtGui.QLabel("Command History")
-        label_history.setFont(font)
-        self.command_history = QtGui.QPlainTextEdit()
-        self.command_history.setMaximumSize(QtCore.QSize(1000, 500))
-        self.command_history.setReadOnly(True)
-        self.command_history.appendPlainText("Note: The speed will be scaled according to the microstepping mode.")
-        self.command_history.appendPlainText("Note: The time and distance inputs must be positive integers. Numbers that are not integers will be rounded down.")
-        self.command_history.appendPlainText("")
+        # label_history = QtGui.QLabel("Command History")
+        # label_history.setFont(font)
+        # self.command_history = QtGui.QPlainTextEdit()
+        # self.command_history.setMaximumSize(QtCore.QSize(1000, 500))
+        # self.command_history.setReadOnly(True)
+        # self.command_history.appendPlainText("Note: The speed will be scaled according to the microstepping mode.")
+        # self.command_history.appendPlainText("Note: The time and distance inputs must be positive integers. Numbers that are not integers will be rounded down.")
+        # self.command_history.appendPlainText("")
 
         font = QtGui.QFont("Helvetica", 12)
         label_instructions = QtGui.QLabel("Please visit the following site for instructions:")
@@ -129,7 +125,7 @@ self.setupUi()
         formLayout2.setLabelAlignment(QtCore.Qt.AlignLeft)
         formLayout2.addRow(label_level, self.comboBox_level)
 
-        formLayout2.addRow(label_capacitance, self.capacitance) #LOOK HERE
+        formLayout2.addRow(label_position, self.position) #LOOK HERE
 
         verticalLayout = QtGui.QVBoxLayout()
         verticalLayout.addWidget(self.preset_checkbox)
@@ -158,7 +154,7 @@ self.setupUi()
         verticalLayout2.addLayout(formLayout3)
 
 
-        formLayout3.addRow(label_capacitance, self.capacitance) #LOOK HERE
+        formLayout3.addRow(label_position, self.position) #LOOK HERE
      
         verticalLayout2.addWidget(label_history)
         verticalLayout2.addWidget(self.command_history)
