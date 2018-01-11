@@ -34,8 +34,8 @@ class Ui_Form(QtGui.QWidget):
         # label_motorState = QtGui.QLabel("Stepper Motor Parameters")
         # label_motorState.setFont(font)
         label_time = QtGui.QLabel("Select Display Speed:")
-#        label_steps = QtGui.QLabel("Distance (in):")
-#        label_direction = QtGui.QLabel("Direction:")
+        label_endframe = QtGui.QLabel("End Frame Selection:")
+        label_stframe = QtGui.QLabel("Beginning Frame Selection:")
 #        label_mode = QtGui.QLabel("Mode:")		
         label_headPosition = QtGui.QLabel("Head Position: ") #LOOK HERE	
         label_headPosition.setFont(font)
@@ -60,18 +60,18 @@ class Ui_Form(QtGui.QWidget):
         self.comboBox_time = QtGui.QComboBox()
         self.comboBox_time.addItems(["0.5X Speed","Real Time Speed","2X Speed"])
         self.comboBox_time.setCurrentIndex(1)
-        #self.lineEdit_distance = QtGui.QLineEdit()
-        #self.lineEdit_distance.setMaximumSize(QtCore.QSize(100, 30))
-        #self.lineEdit_distance.setText("0")
-        #self.comboBox_direction = QtGui.QComboBox()
-        #self.comboBox_direction.addItems(["Up", "Down"])
-        #self.comboBox_mode = QtGui.QComboBox()
-        #self.comboBox_mode.addItems(["1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "1/64", "1/128"])
-        #self.comboBox_mode.setCurrentIndex(0)
-
-        #self.preset_checkbox = QtGui.QCheckBox("Use preset elevator levels")
-        #self.preset_checkbox.setCheckState(False)
-        #self.preset_checkbox.setTristate(False)
+        self.lineEdit_stframe = QtGui.QLineEdit()
+        self.lineEdit_stframe.setMaximumSize(QtCore.QSize(100, 30))
+        self.lineEdit_stframe.setText("0")
+        self.lineEdit_endframe = QtGui.QLineEdit()
+        self.lineEdit_endframe.setMaximumSize(QtCore.QSize(100, 30))
+        # Implement some way to determine amount of frames in video in NNTracker
+        # and feed through to endframe default
+        self.lineEdit_endframe.setText("-")
+        
+        self.preset_checkbox = QtGui.QCheckBox("Manually Select Frames to be Run")
+        self.preset_checkbox.setCheckState(False)
+        self.preset_checkbox.setTristate(False)
         #label_level = QtGui.QLabel("Level:")
         #self.comboBox_level = QtGui.QComboBox()
         #self.comboBox_level.addItems(["1", "2", "3"])
@@ -110,7 +110,7 @@ class Ui_Form(QtGui.QWidget):
         formLayout.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         formLayout.setLabelAlignment(QtCore.Qt.AlignLeft)
         formLayout.addRow(label_time, self.comboBox_time)
-        #formLayout.addRow(label_steps, self.lineEdit_distance)
+        formLayout.addRow(label_endframe, self.lineEdit_stframe)
         #formLayout.addRow(label_direction, self.comboBox_direction)
         #formLayout.addRow(label_mode, self.comboBox_mode)
         #formLayout.addRow(label_torque, self.comboBox_torque)
@@ -165,15 +165,15 @@ class Ui_Form(QtGui.QWidget):
     
     def updateUI(self):
         if self.preset_checkbox.checkState() == 0:
-            #self.lineEdit_distance.setEnabled(True)
-            #self.lineEdit_distance.setText("0")
+            self.lineEdit_stframe.setEnabled(True)
+            self.lineEdit_stframe.setText("0")
             #self.comboBox_direction.setEnabled(True)
             #self.comboBox_level.setEnabled(False)
             self.btn_assign.setEnabled(False)
         
         #if self.preset_checkbox.checkState() == 2:
-            #self.lineEdit_distance.setEnabled(False)
-            #self.lineEdit_distance.setText(str(steps))
+            #self.lineEdit_stframe.setEnabled(False)
+            #self.lineEdit_stframe.setText(str(steps))
             #self.comboBox_direction.setEnabled(False)
         
             #if direction == "Up":
