@@ -35,7 +35,6 @@ class Ui_Form(QtGui.QWidget):
         # label_motorState.setFont(font)
         label_time = QtGui.QLabel("Select Display Speed:")
 #        label_steps = QtGui.QLabel("Distance (in):")
-#        label_wheeldiameter = QtGui.QLabel("Wheel Diameter (in)")
 #        label_direction = QtGui.QLabel("Direction:")
 #        label_mode = QtGui.QLabel("Mode:")		
         label_position = QtGui.QLabel("Head Position: ") #LOOK HERE	
@@ -64,8 +63,6 @@ class Ui_Form(QtGui.QWidget):
         #self.lineEdit_distance = QtGui.QLineEdit()
         #self.lineEdit_distance.setMaximumSize(QtCore.QSize(100, 30))
         #self.lineEdit_distance.setText("0")
-        #self.lineEdit_wheeldiameter = QtGui.QLineEdit()
-        #self.lineEdit_wheeldiameter.setText("1")
         #self.comboBox_direction = QtGui.QComboBox()
         #self.comboBox_direction.addItems(["Up", "Down"])
         #self.comboBox_mode = QtGui.QComboBox()
@@ -117,7 +114,6 @@ class Ui_Form(QtGui.QWidget):
         #formLayout.addRow(label_direction, self.comboBox_direction)
         #formLayout.addRow(label_mode, self.comboBox_mode)
         #formLayout.addRow(label_torque, self.comboBox_torque)
-        #formLayout.addRow(label_wheeldiameter, self.lineEdit_wheeldiameter)
        
         formLayout2 = QtGui.QFormLayout()
         formLayout2.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
