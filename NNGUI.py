@@ -1,5 +1,8 @@
 """
-Creating a GUI that can be launched from terminal and from which a user may select specific frames to track, if they so choose.
+Creating a GUI that can be launched from terminal and from which a user may select 
+specific frames to track, if they so choose. Nothing additional must be used,
+beyond this program, to determine head location (i.e. no weighty LEDs or colors
+that may impact a rodent's performance in behavioral tasks).
 """
 
 import sys
@@ -15,7 +18,11 @@ class Ui_Form(QtGui.QWidget):
         self.setupUi()
     
     def setupUi(self):
-
+    """
+    Construct a Gui, launched from the command line (see variable app) s.t. the user may select
+    frame range and view the approximate head position of the rodent in the video as the rodent
+    moves across the screen.
+    """
         self.setWindowTitle("RNEL Rodent Headtracking")
         rowSpacer = QtGui.QSpacerItem(1, 20)
         columnSpacer = QtGui.QSpacerItem(50, 1)
