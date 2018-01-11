@@ -1,6 +1,6 @@
 # NNVideoTracking
 
-An RNEL Solution to Approximate Rodent Head Tracking in an Attempt to Account for Occlusion by Wires, and Determine Head Direction When Fed a Video
+An RNEL solution to rodent head tracking in an attempt to account for occlusion by wires, and determine head direction when fed a video
 
 # Some Notes on Usage:
 
