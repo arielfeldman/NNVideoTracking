@@ -37,25 +37,25 @@ class Ui_Form(QtGui.QWidget):
 #        label_steps = QtGui.QLabel("Distance (in):")
 #        label_direction = QtGui.QLabel("Direction:")
 #        label_mode = QtGui.QLabel("Mode:")		
-        label_position = QtGui.QLabel("Head Position: ") #LOOK HERE	
-        label_position.setFont(font)
+        label_headPosition = QtGui.QLabel("Head Position: ") #LOOK HERE	
+        label_headPosition.setFont(font)
 
-        self.position = QtGui.QLCDNumber(self) #LOOK HERE 
-        self.position.setFont(font)
+        self.headPosition = QtGui.QLCDNumber(self) #LOOK HERE 
+        self.headPosition.setFont(font)
         palette = QPalette()
        # palette.setBrush(QtGui.QPalette.Light, QtCore.Qt.black)
         brush = QtGui.QBrush(QtGui.QColor(0,0,0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Dark, brush)
-        self.position.setPalette(palette)
+        self.headPosition.setPalette(palette)
 
-        self.position.setDigitCount(8)
-        self.threadclass = Position()
+        self.headPosition.setDigitCount(8)
+        self.threadclass = HeadPosition()
         self.threadclass.start()
 		
-        self.connect(self.threadclass, QtCore.SIGNAL('POS'), self.updatePosition)        
+        self.connect(self.threadclass, QtCore.SIGNAL('POS'), self.updateHeadPosition)        
         
-        self.position.display(0,0) # just so something is there
+        self.headPosition.display(0,0) # just so something is there
                 
         self.comboBox_time = QtGui.QComboBox()
         self.comboBox_time.addItems(["0.5X Speed","Real Time Speed","2X Speed"])
@@ -120,7 +120,7 @@ class Ui_Form(QtGui.QWidget):
         formLayout2.setLabelAlignment(QtCore.Qt.AlignLeft)
         #formLayout2.addRow(label_level, self.comboBox_level)
 
-        formLayout2.addRow(label_position, self.position) #LOOK HERE
+        formLayout2.addRow(label_headPosition, self.headPosition) #LOOK HERE
 
         verticalLayout = QtGui.QVBoxLayout()
         verticalLayout.addWidget(self.preset_checkbox)
@@ -148,7 +148,7 @@ class Ui_Form(QtGui.QWidget):
         formLayout3 = QtGui.QFormLayout()
         verticalLayout2.addLayout(formLayout3)
 
-        formLayout3.addRow(label_position, self.position) #LOOK HERE
+        formLayout3.addRow(label_headPosition, self.headPosition) #LOOK HERE
      
         verticalLayout2.addWidget(label_history)
         verticalLayout2.addWidget(self.command_history)
@@ -185,11 +185,13 @@ class Ui_Form(QtGui.QWidget):
             # self.comboBox_level.setEnabled(True)
             # self.btn_assign.setEnabled(True)
 
-    def updatePosition(self, val):
-        self.position.display(val)
+    def updateHeadPosition(self, val):
+        self.headPosition.display(val)
 
 if __name__ == '__main__':
+    # allows us to run the GUI from the command line
     app = QtGui.QApplication(sys.argv)
+    
     ex = Ui_Form()
     ex.show()
         
