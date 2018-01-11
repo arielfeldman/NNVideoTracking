@@ -71,7 +71,6 @@ class Ui_Form(QtGui.QWidget):
         
         self.preset_checkbox = QtGui.QCheckBox("Manually Select Frames to be Run")
         self.preset_checkbox.setCheckState(False)
-        self.preset_checkbox.setTristate(False)
         #label_level = QtGui.QLabel("Level:")
         #self.comboBox_level = QtGui.QComboBox()
         #self.comboBox_level.addItems(["1", "2", "3"])
