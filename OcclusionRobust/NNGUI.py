@@ -18,11 +18,11 @@ class Ui_Form(QtGui.QWidget):
         self.setupUi()
     
     def setupUi(self):
-    """
-    Construct a Gui, launched from the command line (see variable app) s.t. the user may select
-    frame range and view the approximate head position of the rodent in the video as the rodent
-    moves across the screen.
-    """
+    
+    # Construct a Gui, launched from the command line (see variable app) s.t. the user may select
+    # frame range and view the approximate head position of the rodent in the video as the rodent
+    # moves across the screen.
+    
         self.setWindowTitle("RNEL Rodent Headtracking")
         rowSpacer = QtGui.QSpacerItem(1, 20)
         columnSpacer = QtGui.QSpacerItem(50, 1)
