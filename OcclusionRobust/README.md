@@ -8,6 +8,6 @@ Though still in Beta phase, I am aiming to use a correlation filter to aid a neu
 
 # Some Notes on Usage:
 
-This implementation is not meant to be used as a realtime tracker. Our neural network approximates the center of the rodents head and movement path to predict rodent head direction at any given time, referencing the weighting that has been created by its training set.
+This implementation is an offline tracker. We are not attempting to track in real time. Our neural network approximates the center of the rodents head and movement path to predict rodent head direction at any given time, referencing the weighting that has been created by its training set.
 
 The head tracking program has been implemented for use on video collected during behavioral experiments, in an effort to qualify rodent movement. In this way, we hope to better determine a rodent's behavior during such a task.
