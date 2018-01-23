@@ -2,6 +2,10 @@
 
 A prototype of an RNEL solution to rodent head tracking in an attempt to account for occlusion by wires, determine head direction, and classify gait of a rodent during a behavioral task, none of which were features in our earlier implementation.
 
+## The Plan:
+
+Though still in Beta phase, I am aiming to use a correlation filter to aid a neural network during training to distinguish a rodent's head from the rest of it's body when fed a video. Then, optical flow information will be used to determine the velocity of the rodent, which is important in determining both the head direction of the rodent and his gait. Simultaneously, the video will be input to a recurrent convolutional neural network in order to distinguish the rat's position in space. This complex system of programs shall be easily accessible to the average user through a GUI launchable from the Linux terminal.
+
 # Some Notes on Usage:
 
 This implementation is not meant to be used as a realtime tracker. Our neural network approximates the center of the rodents head and movement path to predict rodent head direction at any given time, referencing the weighting that has been created by its training set.
